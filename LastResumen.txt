@@ -80,6 +80,8 @@ Las requests se hacen siempre a un ENDPOINT: un punto de acceso de una API que p
 -Headers: contienen info sobre el software del servidor, última modificación del resource solicitado, etc. La mayoría son opcionales.
 -Body: info que devuelva el servidor (que no sean headers).
 
+
+
 					VERBOS HTTP (más importantes):
 
 -GET: solicita una representación de un recurso específico,
@@ -87,6 +89,8 @@ Las requests se hacen siempre a un ENDPOINT: un punto de acceso de una API que p
 -PUT: reemplaza todas las representaciones actuales del recurso de destino con la carga útil de la petición. Hace una modificación total de un recurso,
 -DELETE: borra un recurso específico,
 -PATCH: aplica modificaciones parciales a un recurso.
+___________________________________________________________________________________________________________________________________________
+
 
 					MVC (Model View Controller):
 
@@ -97,6 +101,56 @@ Patrón de arquitectura de software para separar el código por sus distintas re
 
 -Vistas: código que va a producir la visualización de interfaces de usuario en HTML.
 -Controladores: código para responder a las acciones que se solicitan en la app: visualizar un elemento, realizar una compra, etc. Enlace entre las vistas y los modelos. Contiene la lógica de aplicación.
+
+En el patrón de diseño MVC (Modelo-Vista-Controlador) que se utiliza en .NET y otros frameworks, el controlador es responsable de manejar la lógica de la aplicación, pero no la lógica del negocio.
+La lógica de la aplicación se refiere a cómo se manejan las solicitudes del usuario.
+ cómo se interactúa con el modelo y cómo se selecciona la vista correcta para mostrar al usuario. 
+Por ejemplo, si un usuario hace clic en un botón para ver su perfil, el controlador determinará qué datos del modelo se necesitan
+ (como el nombre del usuario y la foto del perfil) y seleccionará la vista de perfil para mostrar estos datos.
+
+Por otro lado, la lógica del negocio se refiere a las reglas y operaciones específicas de la empresa o del dominio del problema.
+ Por ejemplo, si estás construyendo una aplicación de comercio electrónico, la lógica del negocio podría incluir cosas como calcular el total de un carrito de compras.
+aplicar descuentos o procesar pagos. Esta lógica del negocio generalmente se maneja en el modelo o en una capa de servicio separada, no en el controlador.
+
+El controlador en .NET se encarga de coordinar el modelo y la vista basándose en las acciones del usuario, pero no implementa las reglas y operaciones específicas del negocio.
+
+___________________________________________________________________________________________________________________________________________
+
+
+En ASP.NET, los datos pueden llegar a los controladores de varias formas, y se utilizan diferentes atributos para indicar de dónde debe obtenerse cada parámetro:
+
+
+[FromBody]: Este atributo indica que el parámetro debe leerse del cuerpo de la solicitud HTTP. Se utiliza comúnmente con datos JSON.
+[FromQuery]: Este atributo indica que el parámetro debe leerse de la cadena de consulta de la URL
+[FromRoute]: Este atributo indica que el parámetro debe leerse de la ruta de la URL
+[FromForm]: Este atributo se utiliza para los datos que se envían desde un formulario HTML
+
+___________________________________________________________________________________________________________________________________________
+
+
+				Inyección de dependencias: 
+
+ La inyección de dependencias es una técnica que permite a un objeto proporcionar las dependencias de otro objeto.
+ En lugar de que las clases creen sus propias dependencias, estas se inyectan cuando la clase se crea.
+ Esto permite que el código sea más reutilizable, más fácil de probar y menos acoplado. En .NET, la inyección de dependencias es una parte integrada del marco.
+
+
+___________________________________________________________________________________________________________________________________________
+
+Tipos de respuestas HTTP:	estado HTTP más comunes que puedes encontrar en ASP.NET:
+
+
+200 OK: La solicitud ha tenido éxito.
+201 Created: La solicitud ha tenido éxito y se ha creado un nuevo recurso como resultado.
+204 No Content: La solicitud ha tenido éxito, pero no hay representación que devolver (es decir, el cuerpo está vacío).
+400 Bad Request: La solicitud no se pudo entender o no se pudo procesar.
+401 Unauthorized: La solicitud requiere autenticación. El cliente debe pasar credenciales de autenticación5.
+403 Forbidden: El cliente no tiene permisos para acceder al recurso.
+404 Not Found: No se pudo encontrar el recurso solicitado.
+500 Internal Server Error: El servidor encontró una condición inesperada que le impidió cumplir con la solicitud
+
+
+
 
 ___________________________________________________________________________________________________________________________________________
 
@@ -319,7 +373,7 @@ En .NET la autorización se puede implementar utilizando un modelo basado en rol
  mientras que la autorización define lo que un usuario determinado puede hacer dentro de la aplicación
 ___________________________________________________________________________________________________________________________________________
 		
-CONSTRUCTOR
+			CONSTRUCTOR
 
 Un constructor en C# es un método especial de una clase que se ejecuta automáticamente cuando se crea una instancia de esa clase.
  Su propósito principal es inicializar el objeto y establecer su estado inicial.
