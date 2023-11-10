@@ -1,0 +1,362 @@
+NET Framework: 
+sólo funciona en Windows. ultima versión: 4.8 en abril 2019. Con él se pueden crear las siguientes aplicaciones:
+-Console Apps
+-Windows Communications Foundations (WCF): comunicación de servidores web
+-Windows Workflow Foundation (WF) automatizar procesos de negocios
+-Windows Presentation Foundation (WPF): aplicaciones de escritorio con complejas UI
+-Windows Form: aplicaciones de escritorio sencillas
+-ASP .NET: aplicaciones web con Web Forms, Web API o MVC
+-Azure
+OBJETIVO: Apps de escritorio para Windows
+
+NET Core:
+framework multiplataforma y más liviano que NET Framework. Tiene sólo las librerías necesarias, y sino se instalan paquetes NuGet.
+ Es totalmente side-by-side (varias versiones pueden correr en la misma PC) y permite realizar apps self-contained (con Net Core incorporado). Con él se pueden crear las siguientes aplicaciones:
+-Console Apps
+-ASP.Net Core: MVC y API (evolución de NET Framework)
+-UWP: para apps de escritorio
+OBJETIVO: Apps multiplataforma (web y escritorio)
+
+Mono for Xamarin:
+Runtime para crear apps móviles.
+OBJETIVO: Apps móviles multiplataforma
+
+RUNTIME: código necesario para que corra el lenguaje de la app.
+
+Net Standard:
+set de especifiaciones que indica qué funciones (implementadas APIs) se pueden usar en todas las plataformas.
+ Cada runtime específico implementa una versión específica de Net Standard. (ejemplo: .Net Framework 4.5 implementa Net Standard 1.1).
+Su propósito principal es compartir código entre runtimes. Si quiero crear librerías de clases, debo usar una versión de Net Standard implementada por mis runtimes objetivo.
+
+Microsoft decidió unificar los diferentes runtimes en un único framework. Por eso creó .NET 5 en 2020 con el objetivo de sacar una versión por año (vamos por el 7)
+
+			MODELO CLIENTE-SERVIDOR:
+
+Modelo que permite la distribución de tareas dentro de una red de ordenadores.
+ Un servidor es un hardware que proporciona los recursos necesarios para otros ordenadores o programas o un programa informático que se comunica con los clientes. 
+Las normas que definen esa comunicación son protocolos.
+Este modelo tiene una administración central ya que el servidor está en el centro de la red y todos los recursos importantes se encuentran en él.
+Desventajas: si se cae el server, se cae todo el sistema. Para eso hay arquitecturas multi-servidor. 
+Si un servidor se ve comprometido, el servicio ofrece alguno de los otros (técnica conocida como "mirroring").
+
+		ARQUITECTURA POR CAPAS (TRES CAPAS):
+
+Una capa es un conjunto de "cosas" que tienen cierta responsabilidad (ejemplo: un conjunto de clases). Esta arquitectura establece 2 reglas:
+1: Cada capa debe tener una responsabilidad única.
+2: Las capas deben respetar una estructura jerárquica estrícta. Cada capa puede comunicarse sólo con la que está inmediatamente debajo suyo, pero NO al revés. No se pueden saltar capas.
+VENTAJAS: fácil de testear cada capa por la división de responsabilidades. Además, ante un cambio, sólo se afecta a la capa en que se implementó.
+DESVENTAJAS: Si hay muchas capas, afecta al rendimiento de la app. Además, la modificación de ciertas operaciones puede afectar a todas las capas.
+TRES CAPAS (la arquitectura más común):
+-Presentación: atiende los eventos del cliente. Si el cliente es un humano, atiende los clicks en un HTML. Si es otro sistema, atiende peticiones REST.
+-Lógica de negocio: contiene los requerimientos funcionales del sistema,
+-Acceso a datos: permite obtener o guardar datos de la app.
+
+API (Application Programming Interface):
+Una API es una interfaz para que programas de software se comuniquen entre ellos y compartan datos bajo diferentes estándares. 
+Las APIs pueden ser locales o remotas.
+ Las remotas utilizan un servicio web y sus arquitecturas pueden ser SOAP (Simple Object Access Protocol) o REST.
+ El más común es REST: Representational State Transfer.
+ Generalmente los archivos de info enviados y recibidos son JSON.
+ Las APIs pueden ser públicas o privadas.
+ Las privadas requieren autenticación mediante TOKEN (contiene un objeto cifrado).
+
+REQUEST-RESPONSE:
+Patrón de intercambio de mensajes. Es muy común en arquitecturas cliente-servidor.
+ El patrón puede ser sincrónico o asincrónico. Las request y responses tienen una forma específica dada por el protocolo HTTP o HTTPS.
+Las requests se hacen siempre a un ENDPOINT: un punto de acceso de una API que procesa la request y responde de acuerdo a su implementación interna (encapsulación).
+ Las requests y responses están compuestas por:
+
+		REQUEST:
+-Método: GET, POST, PUT, etc. (verbo HTTP). Indica el tipo de request.
+-Path: la URL que se solicita, donde se encuentra el resource (recurso).
+-Protocolo: contiene HTTP y su versión.
+-Headers: son esquemas de key: value (llave-valor) que contienen información sobre la HTTP request y el navegador. También incluye datos de cookies. La mayoría de headers son opcionales.
+-Body: Si se envía info al servidor (POST o PUT), va en el body.
+
+		RESPONSE:
+
+-Protocolo: contiene HTTP y su versión.
+-Status code: código de respuesta. EJEMPLOS: 200 OK (solicitud satisfactoria), 404 Not Found (el servidor no encontró el resource), 403 Forbidden (el cliente tine credenciales válidas pero no posee permisos o privilegios necesarios para cierto contenido),  400 Bad Request (solicitud errónea), 401 Unauthorized (faltan credenciales de autenticación válidas para el resource o son inválidas), 500 Internal Server Error (El servidor no puede completar la request por un problema inesperado), etc.
+-Headers: contienen info sobre el software del servidor, última modificación del resource solicitado, etc. La mayoría son opcionales.
+-Body: info que devuelva el servidor (que no sean headers).
+
+					VERBOS HTTP (más importantes):
+
+-GET: solicita una representación de un recurso específico,
+-POST: Envía una entidad a un recurso específico. Se suele usar para crear un nuevo recurso,
+-PUT: reemplaza todas las representaciones actuales del recurso de destino con la carga útil de la petición. Hace una modificación total de un recurso,
+-DELETE: borra un recurso específico,
+-PATCH: aplica modificaciones parciales a un recurso.
+
+					MVC (Model View Controller):
+
+Patrón de arquitectura de software para separar el código por sus distintas responsabilidades, en 3 capas: Modelos Vistas y Controladores.
+
+-Modelos: capa donde se trabaja con los datos. Contiene mecanismos para acceder y actualizar información.
+ Se suele utilizar librerías o algún ORM como Entity Framework para la abstracción de bases de datos y persistencia en objetos. Contiene la lógica de negocio.
+
+-Vistas: código que va a producir la visualización de interfaces de usuario en HTML.
+-Controladores: código para responder a las acciones que se solicitan en la app: visualizar un elemento, realizar una compra, etc. Enlace entre las vistas y los modelos. Contiene la lógica de aplicación.
+
+___________________________________________________________________________________________________________________________________________
+
+					DIAGRAMA DE CLASES:
+	
+Es un diagrama puramente orientado al modelo de POO, ya que define las clases que se utilizarán y las relaciones entre ellas. Este diagrama está formado por dos elementos: CLASES y RELACIONES.
+CLASES: representa una clase dentro del paradigma POO. Normalmente representa entidades o conceptos del "negocio."
+ Una clase define un grupo de objetos que comparten características, condiciones y significado.
+ Para encontrarlas, es buena práctica buscar los sustantivos del enunciado:
+ Animal, Persona, Mensaje, etc. 
+Una clase está compuesta por tres elementos: nombre, atributos y funciones.
+
+ Pueden o no representarse en el diagrama. La clase es una caja dividida en tres zonas: la primera tiene el nombre, la segunda los atributos y la tercera las funciones.
+
+RELACIONES: identifica una dependencia. Puede ser entre dos o más clases (más común) o una clase hacia sí misma (dependencia reflexiva). 
+
+Las relaciones se representan con una línea que une las clases. Las relaciones tienen las siguientes características:
+-Multiplicidad: el número de elementos de una clase que participan en una relación (se utiliza N o * para un número cualquiera),
+-Nombre de la asociación: Ayuda a entender la relación y suelen ser verbos (una empresa contrata a n empleados).
+
+				TIPOS PRINCIPALES DE RELACIONES:
+
+-Asociación: línea común y continua: "Una mascota pertenece a una persona",
+-Agregación o composición: indica a un objeto y las partes que lo componen. Es una línea con un rombo del lado de la clase contenedora: "Las mesas están formadas por tornillos",
+-Dependencia: indica que una clase requiere de otra para funcionar. Es una línea discontinua que sale desde la clase que necesita a la otra,
+-Herencia: línea de flecha que va desde la clase hija a la clase padre.
+ 
+El diagrama de clases suele graficarse a partir de una minuta de relevamiento.
+ Para graficarlo, se utiliza el lenguaje UML (Unified Model Language) para el análisis y diseño orientado a objetos.
+ Una buena metodología de desarrollo de software que utiliza UML es UP (Unified Process o proceso unificado) que se destaca por el desarrollo iterativo. 
+El desarrollo se organiza en una serie de mini proyectos cortos de duración fija llamados iteraciones. El resultado de cada uno es un sistema que puede ser probado, integrado y ejecutado.
+
+			
+		PROGRAMACIÓN ORIENTADA A OBJETOS Y PRINCIPIOS FUNDAMENTALES:
+
+-Encapsulación: característica de un lenguaje POO que permite que todo los datos de un objeto queden aislados dentro de él. 
+Sólo se puede acceder a ellos a través de los miembros que la clase proporciona (propiedades y métodos).
+
+-Abstracción: la clase debe representar las características de la entidad hacia el mundo exterior pero ocultando su complejidad.
+ Una clase debe exponer sólo lo que sea necesario para su uso. Lo que se hace por dentro de esa clase es irrelevante.
+
+-Herencia: permite que una clase derivada o hija herede de una clase base o padre. 
+La hija obtiene todos los rasgos del padre, añade otros nuevos y permite modificar algunos de los heredados (override en C#).
+
+-Polimorfismo: permite que una clase hija pueda redefinir un método de la clase padre. 
+Para ello utilizamos el atributo "override" en C#. El método a sobreescribir de la clase padre debe llevar el atributo "virtual" para poder aplicarle un "override" desde la clase hija.
+
+___________________________________________________________________________________________________________________________________________
+
+
+Debido a que los tiempos están cambiando, las empresas, gracias a dios, ya no realizan una aplicación gigantesca que lo hace todo, sino que esa misma aplicación está dividida en diferentes módulos o pequeños proyectos que realizan cada uno una función específica.
+
+El uso de pequeños proyectos para hacer una aplicación más grande la denominamos arquitectura de microservicios.
+
+ los microservicios se nutren o se basan en APIs
+
+							QUE ES UNA API?
+
+ Una API es el punto de entrada del exterior a tu proyecto.
+Por supuesto lo mismo se aplica cuando nosotros somos los que consumimos diferentes API’s.
+"tenemos nuestro front end, el cual consume al back end a través de una API, y a su vez el back end consume otros dos servicios a través de APIs."
+- Tipos de API en C#
+En C# disponemos de dos opciones para crear APIs los cuales son SOAP y REST.
+
+Ambas opciones tienen diferentes características pero el objetivo final es el mismo, enviar información entre un cliente y un servidor.
+___________________________________________________________________________________________________________________________________________
+
+						DIFERENCIAS ENTRE SOAP Y REST
+*protocolo*
+Una gran diferencia es que SOAP es un protocolo, mientras que REST es una arquitectura que funciona sobre el protocolo HTTP
+
+*desarrollo*
+esarrollar un servicio SOAP requiere de más tiempo, tanto para el cliente como para el servidor, ya que debemos crear un fichero .wsdl el cual es un XML que contiene los datos que necesita y la dirección de donde esta ese servicio web. 
+El formato `.wsdl` nos permite además añadir un dtd el cual puede validar todos los campos del xml antes de enviar el mensaje. 
+
+
+Por otra parte en REST funciona por el protocolo HTTP lo que implica que para recibir/enviar información debemos hacerlo a través de peticiones web, a través de la URL o utilizando el cuerpo del mensaje.
+Para el cuerpo del mensaje utilizamos Json o XML. Pero a diferencia de SOAP, todas las validaciones serán en el servidor. 
+
+Por estos motivos el desarrollo de una API REST es mucho más rápido que el de un servicio web SOAP.
+
+Por supuesto SOAP proviene de ventajas en otros aspectos, Por ejemplo, es capaz de mantener el estado entre varias request, mientras que en REST cada reques es individual. 
+
+Cuando creamos APIs debemos crear los endpoint con CRUD en mente.
+
+
+							 Qué es CRUD?
+
+CRUD es un acronimo que hace referencia a sus siglas como 
+
+Create (crear) para el que utilizaremos el método HTTP POST.
+Read (leer) Para el que se utiliza el método HTTP GET.
+Update (actualizar) para el que utilizaremos HTTP PUT.
+Delete (eliminar) Para el que utilizaremos HTTP DELETE.
+
+Cuando creamos endpoints para una API lo hacemos en un controller
+crearemos una clase controlador EjemploController y le añadiremos el Atributo [ApiController]  y debemos importar la librería using Microsoft.AspNetCore.Mvc;
+
+Y ahora solo nos queda la creación de los endpoints tanto para leer como para escribir.
+___________________________________________________________________________________________________________________________________________
+			
+		Creación de un endpoint GET en C#
+
+Un endpoint GET es el que utilizaremos para leer y es muy sencillo,
+ únicamente debemos crear un método, y decorar este método 
+bien sean los atributos `[HttpGet]` para indicar el método  HTTP para utilizar junto con `[Route(“ruta”)]` para indicar la ruta
+ o directamente [HttpGet(“ruta”)] que nos permite indicar el método HTTP y la ruta que el navegador va a necesitar para ser llamado.
+
+___________________________________________________________________________________________________________________________________________
+
+.NET Framework, .NET Core y .NET son tres implementaciones de la plataforma .NET de Microsoft, cada una con sus propias características y usos.
+
+.NET Framework: Es la implementación original de .NET, lanzada en 2002. 
+Está diseñada principalmente para aplicaciones de Windows y proporciona un conjunto completo de bibliotecas y APIs para el desarrollo.
+ Sin embargo, .NET Framework solo se ejecuta en sistemas operativos Windows.
+
+.NET Core: Lanzado en 2016, .NET Core es una versión más ligera y modular de .NET
+ A diferencia de .NET Framework, .NET Core es multiplataforma, lo que significa que puede ejecutarse en varios sistemas operativos, como Windows, macOS y Linux
+.NET Core también es completamente de código abierto
+Además, .NET Core puede estar instalado a nivel de equipo, de usuario o incluso a nivel de aplicación
+
+A nivel de equipo: Esto significa que .NET Core se instala en una ubicación central en el sistema.
+ generalmente en una carpeta del sistema y está disponible para todos los usuarios y aplicaciones en ese sistema.
+ Este es el método de instalación más común y es el que se utiliza cuando instalas .NET Core a través de un instalador oficial de Microsoft.
+
+A nivel de usuario: En este caso .NET Core se instala en una ubicación específica para un usuario individual.
+ como la carpeta del usuario. Esto permite a ese usuario tener su propia versión de .NET Core sin afectar a otros usuarios en el mismo sistema.
+
+A nivel de aplicación: Aquí, .NET Core se instala junto con una aplicación específica y solo se utiliza para esa aplicación.
+ Esto puede ser útil si tu aplicación requiere una versión específica de .NET Core que no quieres instalar a nivel de sistema o de usuario
+ Este método de instalación también se conoce como "auto-contenido".
+
+A nivel de equipo: Imagina que estás en una empresa donde varios desarrolladores trabajan en diferentes proyectos en la misma máquina.
+ En este caso, puedes instalar .NET Core en una ubicación central en el sistema, como C:\Program Files\dotnet\  y todos los desarrolladores pueden acceder a él para sus respectivos proyectos.
+
+A nivel de usuario: Supongamos que compartes tu ordenador personal con otros miembros de tu familia y solo tú eres desarrollador.
+ En este caso, puedes instalar .NET Core en tu directorio de usuario, como C:\Users\TuNombre\dotnet\  para que solo tú puedas acceder a él y no afecte a otros usuarios del sistema.
+
+A nivel de aplicación: Digamos que estás desarrollando una aplicación que será distribuida a varios usuarios y quieres asegurarte de que la aplicación siempre use una versión específica de .NET Core
+ independientemente de lo que el usuario tenga instalado en su sistema. 
+En este caso, puedes incluir .NET Core con tu aplicación (en la misma carpeta que tu aplicación) para que se use específicamente para esa aplicación. Esto se conoce como una aplicación autocontenida.
+
+
+
+___________________________________________________________________________________________________________________________________________
+
+JWT:
+Un JSON Web Token (JWT) es un token de acceso estandarizado que permite el intercambio seguro de datos entre dos partes
+ Un JWT firmado consta de tres partes, todas ellas codificadas en Base64 y separadas por un punto.
+
+el hash se refiere a la firma digital que se utiliza para verificar la autenticidad del token
+La firma se genera utilizando un algoritmo de hash, que toma los datos del encabezado y la carga útil del JWT, junto con una clave secreta, y produce un hash único.
+Cuando el servidor recibe un JWT, puede generar su propio hash utilizando los mismos datos y la misma clave secreta.
+ Si el hash generado por el servidor coincide con el hash en el JWT, el servidor puede confiar en que el JWT es auténtico y no ha sido manipulado.
+
+Header (Cabecera): El header consta generalmente de dos valores y proporciona información importante sobre el token.
+ Contiene el tipo de token y el algoritmo de la firma y cifrado utilizados
+
+Payload (Carga útil): El campo payload de JSON Web Token contiene la información real que se transmitirá a la aplicación
+  Aquí se definen algunos estándares que determinan qué datos se transmiten y cómo.
+
+La información se proporciona como pares key/value (clave-valor); las claves se denominan claims en JWT.
+
+Signature (Firma): La firma se utiliza para verificar que el remitente del JWT es quien dice ser y para asegurar que el mensaje no ha sido cambiado en el camino.
+ Esta codificación solo será efectiva si se utiliza una clave secreta que debe ser conocida solamente por la aplicación en cuestión.
+
+Es importante recordar que los JWT pueden ser decodificados por cualquier sin necesidad de disponer de las claves privadas.
+ por esta razón, nunca se debe incluir información sensible como contraseñas en los mismos.
+
+
+Las claims, la signature y el algoritmo de hasheo son partes fundamentales de un JSON Web Token (JWT)12:
+
+Claims: Las claims son piezas de información que se afirman sobre un sujeto
+. En un JWT, una claim aparece como un par nombre/valor donde el nombre siempre es una cadena y el valor puede ser cualquier valor JSON
+ Por ejemplo el siguiente objeto JSON contiene tres claims (sub, name, admin):
+{
+  "sub": "1234567890",
+  "name": "Coria Ezequiel",
+  "admin": true
+}
+
+Signature:  Se forma utilizando el encabezado codificado, la carga útil codificada y una contraseña.
+ Todo esto está debidamente codificado en el formato que se especificó en el encabezado.
+ Esta signature se utiliza para verificar que el mensaje no haya sido alterado.
+
+Algoritmo de hasheo: El algoritmo de hasheo se especifica en el encabezado del JWT.
+
+En cuanto a dónde guardar el salt/secret:
+
+ hay varias opciones dependiendo de tus necesidades y del entorno en el que estés trabajando.
+ Algunas opciones comunes incluyen:
+
+En el servidor: Puedes guardar el salt/secret en el servidor.
+ Esto es seguro ya que solo el servidor conoce el salt/secret y lo utiliza para generar y verificar los JWT.
+
+En una variable de entorno: Otra opción es guardar el salt/secret en una variable de entorno en el servidor. 
+Esto puede ser útil si estás trabajando en un entorno de desarrollo y no quieres exponer el salt/secret en tu código.
+En un servicio de almacenamiento seguro: También puedes considerar el uso de un servicio de almacenamiento seguro
+ como AWS Secrets Manager o Azure Key Vault, para almacenar el salt/secret.
+Es importante tener en cuenta que el salt/secret debe mantenerse privado y seguro en todo momento, ya que cualquier persona con acceso al salt/secret podría generar JWT válidos
+
+
+___________________________________________________________________________________________________________________________________________
+
+			AUTENTICACION Y AUTORIZACIÓN:
+
+En .NET, la autenticación y la autorización son dos componentes fundamentales para la seguridad de las aplicaciones
+
+Autenticación: Es el proceso de obtener credenciales de identificación. como el nombre y la contraseña de un usuario, y validar esas credenciales en una autoridad.
+ La entidad que envió las credenciales se considera una identidad autenticada si las credenciales son válidas.
+
+En .NET el mecanismo principal para identificar a los usuarios es el sistema de pertenencia a ASP.NET Core Identity.
+ que almacena la información del usuario en un almacén de datos configurado por el desarrollador.
+
+Autorización: Una vez establecida una identidad. Un proceso de autorización determina si esa identidad tiene acceso a un recurso determinado.
+ La autorización implica conceder permiso a una entidad de seguridad autenticada para realizar una acción o acceder a un recurso.
+En .NET la autorización se puede implementar utilizando un modelo basado en roles o un modelo basado en directivas.
+
+ La autenticación se preocupa simplemente de identificar quién es el usuario
+ mientras que la autorización define lo que un usuario determinado puede hacer dentro de la aplicación
+___________________________________________________________________________________________________________________________________________
+		
+CONSTRUCTOR
+
+Un constructor en C# es un método especial de una clase que se ejecuta automáticamente cuando se crea una instancia de esa clase.
+ Su propósito principal es inicializar el objeto y establecer su estado inicial.
+ algunos detalles importantes sobre los constructores en C#:
+
+Los constructores tienen el mismo nombre que la clase.
+Una clase puede tener varios constructores que toman diferentes argumentos.
+Los constructores permiten al programador establecer valores predeterminados, limitar la creación de instancias y escribir código flexible y fácil de leer.
+Un constructor que no toma ningún parámetro se denomina constructor sin parámetros.
+Los constructores sin parámetros se invocan cada vez que se crea una instancia de un objeto mediante el operador new y no se especifica ningún argumento en new.
+C#  introduce el concepto de constructores principales, que especifican parámetros que se deben proporcionar para inicializar un objeto nuevo.
+
+___________________________________________________________________________________________________________________________________________
+
+					ENTIDADES Y Dto.
+
+Las entidades y los objetos de transferencia de datos (DTO) son dos conceptos utilizados en la programación
+ especialmente en el diseño de software orientado a objetos y en la arquitectura de aplicaciones.
+
+
+Propósito: Las entidades, también conocidas como objetos de negocio, representan conceptos del dominio del problema y contienen la lógica de negocio
+ Por otro lado, los DTO son objetos simples que se utilizan para transferir datos entre procesos o componentes de una aplicación
+
+Persistencia: Las entidades suelen estar mapeadas a tablas en una base de datos y se utilizan para manipular datos.
+ Los DTO, en cambio, no están diseñados para ser persistentes.
+
+
+
+Contenido: Las entidades pueden contener métodos de negocio y relaciones con otras entidades.
+ Los DTO son más planos y suelen contener solo propiedades.
+
+
+Uso: Las entidades se utilizan en todas las capas de una aplicación
+ mientras que los DTO se utilizan principalmente para el transporte de datos entre la capa de presentación y la capa de negocio o entre diferentes sistemas.
+
+Composición: Un DTO puede combinar propiedades de varias entidades
+
+
+
+
