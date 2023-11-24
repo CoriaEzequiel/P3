@@ -797,6 +797,32 @@ public class AccesDataCliente: IAccesoDataCliente
     {
     }
 
+    public string GetDataCliente(int id) 
+    {
+        //obtener data del cliente desde una BD     
+        return "Dummy Customer Data"; 
+    }
+}
+
+En el ejemplo anterior, LogicaNegocio incluye constructor con un parámetro de tipo IAccesoDataCliente. Ahora, la clase de llamada debe inyectar un objeto de IAccesoDataCliente.
+
+Continuemos con el ejemplo
+
+public class CustomerService
+{
+    CustomerBusinessLogic _customerBL;
+
+   public CustomerService()
+    {
+        _customerBL = new CustomerBusinessLogic(new CustomerDataAccess());
+    }
+
+   public string GetCustomerName(int id) {
+       return _customerBL.GetCustomerName(id);
+    }
+}
+Existen múltiples herramientas que pueden ser inyectadas como servicios en algunas clases para poder usarlos sin necesidad de instanciar un objeto de cada servicio en cada consulta. Algunos de estos pueden ser un servicio de logs o un servicio de mailing o bien un servicio de ORM, como Entity Framework
+
 
 _____________________________________________________________________________________________________________________
 
