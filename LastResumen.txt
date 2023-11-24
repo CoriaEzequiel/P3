@@ -413,4 +413,390 @@ Composición: Un DTO puede combinar propiedades de varias entidades
 
 
 
+Cuando nos referimos a capas es una abstracción de responsabilidades. 
+Además, la arquitectura establece reglas de cómo se deben comunicar las capas.
+ cada capa puede funcionar y evolucionar independientemente de las otras.
+consideremos una aplicación de comercio electrónico.
+ La capa de presentación muestra productos a los usuarios.
+ la capa de lógica de negocio maneja el carrito de compras.
+ y la capa de acceso a datos interactúa con la base de datos para recuperar y almacenar información del producto.
+si decidimos cambiar la estructura de la base de datos y mover algunos datos a un nuevo esquema:
+ Aunque la capa de acceso a datos puede manejar la mayoría de los cambios:
+la capa de lógica de negocio puede necesitar ser actualizada para reflejar estos cambios (ya que depende de la estructura de datos,
+para funcionar correctamente)
+Del mismo modo la capa de presentación puede necesitar ser actualizada
+ si la forma en que se recuperan los datos afecta a cómo se muestran.
+
+
+Primera regla 
+Cada capa debe tener una responsabilidad única.
+las capas deben estar perfectamente delimitadas de que se ocupa cada una de ellas.
+podemos tener una capa de “presentación” que será la encargada de atender los eventos del cliente y encargada de representar la información
+ podemos tener la capa de “acceso a datos” que será la encargada de guardar y acceder a los datos. 
+
+Segunda regla 
+Las capas deben respetar una estructura jerárquica estricta.
+cada capa puede comunicarse sólo con la que está debajo suyo(pero no al revez)
+una clase ubicada en la capa de presentación puede llamar a un método ubicado en la capa de acceso a datos
+pero nunca la capa de acceso a datos puede llamar a un método de la capa de presentación. 
+Y cuando nos referimos a la próxima más baja significa que no se puede saltar capas.
+
+Ventajas 
+Es fácil testear cada capa por separado debido a la separación clara de responsabilidades que existe entre ellas. 
+Al momento de hacer un cambio:
+si se implementó bien la separación de responsabilidad, este cambio solo debe impactar a la capa responsable y no a todas. 
+Esto se conoce como desacople. 
+
+Desventajas 
+Si se implementaron demasiadas capas el rendimiento de la aplicación puede verse afectado  
+Ciertas operaciones al ser modificadas pueden afectar a todas las capas, haciendo visible que no existe un 100% de desacople entre estas. 
+
+
+
+ la arquitectura de 3 capas es bastante utilizada y es muy útil para entender la separación de responsabilidades de las capas.
+Presentación
+ Atiende los eventos del cliente y representa los datos para el mismo. 
+Teniendo en cuenta que el cliente puede ser un humano u otro sistema
+ esta capa será encargada en caso del humano de atender los clics en un HTML y de renderizar la información de manera visual. 
+ En caso de que sea otro sistema puede atender peticiones rest
+ y devolver información en un formato estructurado (json, xml, etc) que es más fácil de interpretar por un sistema.
+
+Lógica de negocio
+ En esta capa se encuentra todo lo que refiere a las reglas que se encuentran en el negocio: requerimientos funcionales de nuestro sistema
+ si se tiene un alta de usuario esta capa debe proveer el medio para altaDeUsuario y dentro del método se debe realizar todos los pasos para dar de alta un usuario (enviar mail, validar nombre, etc).
+
+Acceso a datos
+ Mediante esta capa podremos obtener o guardar los datos que utilizará nuestra aplicación.
+Observar que no habla de cómo se realiza la persistencia, si es en base de datos o en archivo o etc, solo habla de acceso a datos.
+ Por ejemplo, esta capa debería proveer un medio para poder guardar el usuario y otro para obtenerlo. 
+
+
+
+Si logramos realizar esta separación de responsabilidades podemos notar como a una capa no le interesa cómo está implementada la otra
+a. Así yo puedo reemplazar las implementaciones de las capas, pero esto no afectaría a las demás
+
+
+
+				Web API
+
+El término API es una abreviatura de Application Programming Interfaces,
+interfaz de programación de aplicaciones.
+ Se trata de un conjunto de definiciones y protocolos que se utiliza para desarrollar e integrar el software de las aplicaciones
+permitiendo la comunicación entre dos aplicaciones de software a través de un conjunto de reglas.
+
+podemos hablar de una API como una especificación formal que establece cómo un módulo de un software se comunica o interactúa con otro para cumplir una o muchas funciones.
+dependiendo de las aplicaciones que las vayan a utilizar, y de los permisos que les dé el propietario de la API a los desarrolladores de terceros.
+
+Una de las principales funciones de las API es poder facilitar el trabajo a los desarrolladores
+Con ello, no será necesario tener que reinventar la rueda con cada servicio que se crea, ya que podrás utilizar piezas o funciones que otros ya han creado-
+
+____________________________________________________________________________________________________________________________
+
+			HTTP REQUEST y RESPONSE 
+son dos conceptos básicos en el desarrollo web.
+HTTP significa  HyperText Transfer Protocol.
+ Esta es la forma de comunicación de datos básica en Internet. 
+La comunicación de datos empieza con un request enviado del cliente, y termina con la respuesta del servidor web.
+1.Un sitio web que empieza con la URL http://
+ es entrado en un navegador web de la computadora del cliente.
+2.El navegador envía un request al servidor web que está hospedado en el website.
+3.El servidor web regresa una respuesta
+ como un página de HTML, o algún otro formato de documento al navegador (puede ser un mp4, mp3, pdf, doc, entre otros soportados por el navegador)
+4. El navegador despliega el response del servidor al usuario. 
+
+No todas las requests se hacen desde los navegadores de usuarios finales.
+ de hecho muchas peticiones se hacen desde aplicaciones(Discord, Steam, Whatsapp, Instagram)
+ o incluso de dispositivos IoT(Google Home, Alarmas).
+
+
+Las peticiones o requests se hacen siempre a un endpoint:
+ un punto de acceso de una API que procesa dicha solicitud y responde de acuerdo a su implementación interna.
+ Aquí se puede ver que las APIs toman claramente la encapsulación de la POO
+
+
+
+
+HTTP Request Structure from Client
+
+Un HTTP request se compone de:
+
+Método: GET, POST, PUT, DELETE (Indica que tipo de request es)
+Path: la URL que se solicita   (Donde se encuentra el resource)
+Protocolo: contiene HTTP y su versión.
+Headers: Son esquemas de key: (value que contienen información sobre el HTTP request y el navegador)
+ Aquí también se encuentran los datos de las cookies. La mayoría de los headers son opcionales.
+Body: Si se envía información al servidor a través de POST o PUT, ésta va en el body.
+
+
+HTTP Response Structure from Web Server
+Una vez que el navegador envía el HTTP request:
+ el servidor responde con un HTTP response
+ compuesto por:
+
+Protocolo. Contiene HTTP y su versión
+Status code: El código de respuesta
+( por ejemplo: 200 OK, que significa que el GET request ha sido satisfactorio
+ y el servidor devolverá los contenidos del documento solicitado. 
+Otro ejemplo es 404 Not Found, el servidor no ha encontrado el resource solicitado)
+Headers: Contienen información sobre el software del servidor, cuando se modificó por última vez el resource solicitado.
+Body: Si el servidor devuelve información que no sean headers ésta va en el body.
+
+________________________________________________________________________________________________________________
+
+			EF
+
+Entity Framework (EF) es una solución de Microsoft para un Mapeador Relacional de Objetos (ORM) en aplicaciones .NET
+ En términos sencillos, EF es como un puente que conecta tu código con la base de datos.
+
+Imagina que estás construyendo una aplicación y necesitas almacenar y recuperar datos de una base de datos.
+ Normalmente, tendrías que escribir mucho código para interactuar con la base de datos:
+ convertir los datos en objetos que tu código pueda entender
+ y luego convertir los cambios en tus objetos de nuevo a un formato que la base de datos pueda entender.
+
+Aquí es donde entra en juego Entity Framework.
+ EF te permite trabajar con los datos en forma de objetos y propiedades específicos de tu dominio.
+ como clientes y direcciones de clientes sin tener que pensar en las tablas de la base de datos y las columnas en las que se almacenan estos datos
+
+Por lo tanto, EF te ayuda a reducir la cantidad de código que necesitas escribir para estas tareas de acceso y gestión de datos
+ permitiéndote centrarte más en la lógica de tu aplicación.
+
+__________________________________________________________________________________________________________________________
+
+
+Patrón repository
+
+Está diseñado para crear una capa de abstracción entre la capa de acceso a datos y la capa de lógica de negocios(de una aplicación). 
+Implementar estos patrones puede ayudar a aislar la aplicación de cambios en el almacén de datos
+y puede facilitar la realización de pruebas unitarias automatizadas o el desarrollo controlado por pruebas (TDD).
+
+Este patrón permite crear una clase o varias en donde estén definidos todos los métodos que interactúen con la base de datos,
+ esta clase consume el contexto de la base de datos.
+
+Otro de los aspectos fundamentales
+ es que estas clases que se encarga de los métodos de datos implementando una interfaz en donde se definen la firma de los métodos(tipo nombre y parámetros del método) que componen a la clase que hace de repository. Si tengo dividido el repository en varias clases entonces debo definir una interfaz por clase y hacer que dicha clase implemente la interfaz.
+
+La interfaz tiene la utilidad de que si en un futuro quiero implementar otro repository ya sea que porque tengo otro contexto debido a que algunos datos se manejan en otra base datos para inteligencia de negocio o por motivos de disponibilidad, entonces solo hace falta implementar la misma interfaz en la nueva clase repository análoga y de esta manera nos aseguramos que la clase contenga la totalidad de los métodos definidos de la capa de datos y definidos de la misma manera así nos evitamos inconvenientes en las capas lógicas que utilizan estos métodos
+
+
+El patrón de repositorio sugiere que todas las operaciones relacionadas con la base de datos deben estar en una clase o clases separadas
+ conocidas como repositorios. 
+
+Cada método en un repositorio representa una consulta a la base de datos.
+
+Ahora, una interfaz es como un contrato que define qué métodos debe tener una clase.
+ Cuando una clase implementa una interfaz, está prometiendo que incluirá todos los métodos definidos en esa interfaz.
+
+Entonces:  cada clase de repositorio debe implementar una interfaz.
+ Esta interfaz define la “firma” de los métodos que la clase de repositorio debe tener.
+ La firma de un método incluye el tipo de retorno del método, el nombre del método y los parámetros del método.
+
+Si tienes varios repositorios (por ejemplo, un repositorio de Usuarios, un repositorio de Productos, etc.)
+ entonces cada uno de estos repositorios debería tener su propia interfaz. 
+Por ejemplo, la interfaz del repositorio de Usuarios podría definir métodos como ObtenerUsuarioPorId(int id)
+ GuardarUsuario(Usuario usuario), etc.
+
+La ventaja de esto es que si en el futuro necesitas cambiar la forma en que accedes a la base de datos 
+(por ejemplo, si cambias de una base de datos SQL a una base de datos NoSQL), 
+solo necesitas crear nuevas clases de repositorio que implementen las mismas interfaces. 
+De esta manera, el resto de tu código no necesita cambiar porque todavía está llamando a los mismos métodos definidos en las interfaces. 
+Esto es lo que se conoce como desacoplamiento:
+ el código de tu aplicación no está directamente ligado a un tipo específico de base de datos.
+
+Una “capa de abstracción” en este contexto se refiere a la idea de ocultar los detalles técnicos o complejos
+ y proporcionar solo la funcionalidad necesaria al usuario o a la capa superior.
+
+En el caso del patrón de repositorio: la “capa de abstracción” es la clase de repositorio.
+Esta clase oculta los detalles de cómo se accede a la base de datos y cómo se realizan las operaciones de la base de datos.
+ En lugar de tener que escribir código SQL complejo en tu lógica de negocio,
+ puedes simplemente llamar a métodos en la clase de repositorio como ObtenerUsuarioPorId(int id) o GuardarUsuario(Usuario usuario).
+ Estos métodos manejan todos los detalles de la interacción con la base de datos.
+
+Por lo tanto, la capa de repositorio es una “capa de abstracción” porque abstrae o esconde los detalles de la base de datos
+ permitiéndote trabajar a un nivel más alto de abstracción.
+ Esto hace que tu código sea más fácil de entender, más fácil de mantener y más flexible ante cambios en la base de datos.
+
+
+
+Una clase de repositorio se encarga de la interacción directa con la base de datos.
+ Proporciona métodos para recuperar, crear, actualizar y eliminar datos en la base de datos. 
+cada método representa una operación específica de la base de datos.
+
+
+La interfaz es  un contrato que define qué métodos debe tener una clase. 
+No tiene ninguna implementación de los métodos
+ solo las firmas de los métodos ( los nombres de los métodos, los tipos de los parámetros y los tipos de retorno).
+
+La clase de repositorio es una clase concreta que implementa esta interfaz. 
+Proporciona la implementación real de los métodos definidos en la interfaz. 
+la clase de repositorio escribe el código que dice exactamente cómo se deben realizar las operaciones de la base de datos.
+
+Una clase de repositorio se encarga de la interacción directa con la base de datos.
+ Proporciona métodos para recuperar, crear, actualizar y eliminar datos en la base de datos.
+ Cada método representa una operación específica de la base de datos.
+
+Una clase de servicios: contiene la lógica de negocio de la aplicación.
+ Esta lógica de negocio puede implicar operaciones más complejas 
+que implican múltiples pasos o la coordinación de varias operaciones de la base de datos.
+ Las clases de servicios a menudo utilizan las clases de repositorio para realizar estas operaciones de la base de datos.
+
+Por lo tanto
+ aunque las clases de repositorio y las clases de servicios pueden trabajar juntas y ambas son importantes en una aplicación,
+ tienen responsabilidades diferentes y no son intercambiables.
+
+__________________________________________________________________________________________________________________________
+
+		Model View Controller (MVC)
+ MVC es una propuesta de arquitectura del software utilizada para separar el código por sus distintas responsabilidades.
+ manteniendo distintas capas que se encargan de hacer una tarea muy concreta, lo que ofrece beneficios diversos.
+
+MVC se usa inicialmente en sistemas donde se requiere el uso de interfaces de usuario
+( aunque el mismo patrón de arquitectura se puede utilizar para distintos tipos de aplicacione)
+urge de la necesidad de crear software más robusto con un ciclo de vida más adecuado
+ donde se potencie la facilidad de mantenimiento, reutilización del código y la separación de conceptos.
+
+Su fundamento es la separación del código en tres capas diferentes, acotadas por su responsabilidad
+en lo que se llaman Modelos, Vistas y Controladores
+
+MVC  está para ayudarnos a crear aplicaciones con mayor calidad.
+
+...
+
+Modelos
+Es la capa donde se trabaja con los datos.
+ contendrá mecanismos para acceder a la información y también para actualizar su estado.
+ Los datos los tendremos habitualmente en una base de datos.
+ por lo que en los modelos tendremos todas las funciones que accederán a las tablas
+ y harán los correspondientes selects, updates, inserts, etc.
+ cabe mencionar que cuando se trabaja con MVC lo habitual también es utilizar otras librerías o algún ORM como Entity Framework,
+ que nos permiten trabajar con abstracción de bases de datos y persistencia en objetos.
+en vez de usar directamente sentencias SQL
+que suelen depender del motor de base de datos con el que se esté trabajando
+ se utiliza un dialecto de acceso a datos basado en clases y objetos.
+
+Vistas
+Las vistas contienen el código de nuestra aplicación que va a producir la visualización de las interfaces de usuario.
+  el código que nos permitirá renderizar los estados de nuestra aplicación en HTML.
+ En las vistas nada más tenemos los códigos HTML y PHP que nos permite mostrar la salida.
+
+En la vista generalmente trabajamos con los datos( no se realiza un acceso directo a éstos)
+ Las vistas requerirán los datos a los modelos y ellas se generará la salida, tal como nuestra aplicación requiera.
+
+Controladores
+Contiene el código necesario para responder a las acciones que se solicitan en la aplicación.
+ como visualizar un elemento, realizar una compra, una búsqueda de información, etc.
+
+En realidad es una capa que sirve de enlace entre las vistas y los modelos.
+ respondiendo a los mecanismos que puedan requerirse para implementar las necesidades de nuestra aplicación. 
+Sin embargo, su responsabilidad no es manipular directamente datos, ni mostrar ningún tipo de salida
+ sino servir de enlace entre los modelos y las vistas para implementar las diversas necesidades del desarrollo.
+
+ 				...
+
+El usuario(a través del browser) realiza una solicitud a nuestro sitio web.
+ Generalmente estará desencadenada por acceder a una página de nuestro sitio. Esa solicitud le llega al controlador.
+El controlador se comunica tanto con modelos como con vistas. 
+A los modelos les solicita datos o les manda realizar actualizaciones de los datos. 
+A las vistas les solicita la salida correspondiente:
+ una vez se hayan realizado las operaciones pertinentes según la lógica del negocio.
+Para producir la salida, en ocasiones las vistas pueden solicitar más información a los modelos. 
+En ocasiones, el controlador será el responsable de solicitar todos los datos a los modelos y de enviarlos a las vistas, 
+haciendo de puente entre unos y otros.
+ Sería corriente tanto una cosa como la otra, todo depende de nuestra implementación.
+
+
+
+Lógica de negocio / Lógica de la aplicación
+Hay un concepto que se usa mucho cuando se explica el MVC que es la "lógica de negocio".
+ Es un conjunto de reglas que se siguen en el software para reaccionar ante distintas situaciones.
+ En una aplicación el usuario se comunica con el sistema por medio de una interfaz,
+ pero cuando acciona esa interfaz para realizar acciones con el programa:
+ se ejecutan una serie de procesos que se conocen como la lógica del negocio.
+ Este es un concepto de desarrollo de software en general.
+
+La lógica del negocio, aparte de marcar un comportamiento cuando ocurren cosas dentro de un software,
+ también tiene normas sobre lo que se puede hacer y lo que no se puede hacer.
+ Eso también se conoce como reglas del negocio.
+
+ Bien, pues en el MVC la lógica del negocio queda del lado de los modelos.
+
+ Ellos son los que deben saber cómo operar en diversas situaciones
+y las cosas que pueden permitir que ocurran en el proceso de ejecución de una aplicación. 
+
+Es decir que en MVC gran parte de la lógica se maneja fuera del controlador.
+esto puede ser en la capa de modelos o bien creando una nueva capa con la lógica de negocio
+(Esta es la diferencia de la capa de datos en la arquitectura de 3 capas)
+
+Por ejemplo, pensemos en un sistema que implementa usuarios.
+ Los usuarios pueden realizar comentarios. 
+Pues si en un modelo nos piden eliminar un usuario nosotros debemos borrar todos los comentarios que ha realizado ese usuario también. 
+Esto no es una responsabilidad del controlador 
+y forma parte de lo que se llama la lógica del negocio y se ejecutará en la capa que hayamos definido.
+
+Sin embargo existe otro concepto que se usa en la terminología del MVC que es la "lógica de aplicación"
+ que es algo que pertenece a los controladores.
+ Por ejemplo, cuando me piden ver el resumen de datos de un usuario.
+ Esa acción le llega al controlador, que tendrá que acceder al modelo del usuario para pedir sus datos.
+ Luego llamará a la vista apropiada para poder mostrar esos datos del usuario. 
+Si en el resumen del usuario queremos mostrar los artículos que ha publicado dentro de la aplicación:
+ quizás el controlador tendrá que llamar al modelo de artículos
+ pedirle todos los publicados por ese usuario y con ese listado de artículos invocar a la vista correspondiente para mostrarlos.
+ Todo ese conjunto de acciones que se realizan invocando métodos de los modelos y mandando datos a las vistas
+forman parte de la "lógica de la aplicación"
+
+En resumen, en MVC la lógica se divide en dos capas distintas
+ cierta lógica (lógica de negocios) está presente en la capa de Modelos o en la capa que hayamos definido para ella
+ y cierta lógica en la capa de controladores(lógica de aplicación).
+ Es importante destacar que en la capa de vistas nunca hay ningún tipo de lógica.
+
+
+
+________________________________________________________________________________________________________________
+
+Ventajas de Utilizar Inyección de Dependencias
+
+Flexible:
+ No hay necesidad de tener un código de búsqueda en la lógica de negocio.
+Elimina el acoplamiento entre módulos
+
+Testable:
+No se necesita un espacio específico de testeo.
+Testeo automático como parte de las construcciones.
+
+Mantenible:
+Permite la reutilización en diferentes entornos de aplicaciones modificando los archivos de configuración en lugar del código.
+Promueve un enfoque coherente en todos aplicaciones y equipos
+
+
+CLASE EN LA QUE SE INYECTA
+
+public class LogicaNegocio
+{
+    AccesDataCliente _dataAccess;
+
+    public LogicaNegocio(AccesDataCliente custDataAccess)
+    {
+        _dataAcces = custDataAccess;
+    }
+
+   public string ProcesoDataCliente(int id)
+    {
+        return _dataAcces.GetDataCliente(id);
+    }
+}
+—------------------------------------------------------
+public interface IAccesoDataCliente
+{
+    string GetDataCliente(int id);
+}
+—------------------------------------------------------
+CLASE A INYECTAR
+
+public class AccesDataCliente: IAccesoDataCliente
+{
+   public AccesDataCliente()
+    {
+    }
+
+
+
 
