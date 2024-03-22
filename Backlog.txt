@@ -15,73 +15,77 @@ Cada historia es una descripción de una funcionalidad desde la perspectiva del 
 Las historias ayudan a los desarrolladores a entender qué necesita el usuario y por qué es importante.
 Por ejemplo, “Registrar escuela/colegio” podría ser una historia dentro de la funcionalidad “Registro de Escuelas/Colegios Acreditados”.
 
+___________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________
 
-
-BACKLOG ECOMMERCE.
+                                        BACKLOG ECOMMERCE.
 
 
 Épicas:
 
-1.Gestión de Productos
-2.Gestión de Usuarios
-3.Procesamiento de Pedidos
-4.Sistema de Pagos
+1. Gestión de Productos
+2. Gestión de Usuarios
+3. Procesamiento de Pedidos
+4. Sistema de Pagos
 
 
-1.		Funcionalidades para la Épica “Gestión de Productos”:
+1. Funcionalidades para la Épica “Gestión de Productos”:
 
-.Añadir productos
-.Editar productos
-.Eliminar productos
-.Visualizar productos
+. Añadir productos
+. Editar productos
+. Eliminar productos
+. Visualizar productos
 
-1.		Historias para la Funcionalidad “Añadir productos”:
+Historias para la Funcionalidad “Añadir productos”:
 
-Como administrador, quiero poder añadir un nuevo producto para que los clientes puedan comprarlo.
-Como administrador, quiero poder añadir detalles del producto como nombre, descripción, precio y fotografía para que los clientes puedan ver la información del producto.
-Como administrador, quiero poder añadir categorías a los productos para que los clientes puedan buscar productos por categoría.
-
-
-
-
-2.		Funcionalidades para la Épica “Gestión de Usuarios”:
-
-.Registro de usuarios
-.Inicio de sesión de usuarios
-.Edición de perfil de usuarios
-.Eliminación de usuarios
-
-
-2.		Historias para la Funcionalidad “Registro de usuarios”:
-
-Como usuario, quiero poder registrarme en la aplicación para poder realizar compras.
-Como usuario, quiero poder proporcionar mi correo electrónico y crear una contraseña durante el registro para poder iniciar sesión en el futuro.
-Como usuario, quiero recibir un correo electrónico de confirmación después del registro para verificar mi cuenta.
+. Como administrador, quiero poder añadir un nuevo producto para que los clientes puedan comprarlo.
+. Como administrador, quiero poder añadir detalles del producto como nombre, descripción, precio y fotografía para que los clientes puedan ver la información del producto.
+. Como administrador, quiero poder añadir categorías a los productos para que los clientes puedan buscar productos por categoría.
 
 
 
 
-3.		Funcionalidades para la Épica “Procesamiento de Pedidos”:
+2. Funcionalidades para la Épica “Gestión de Usuarios”:
 
-.Creación de pedidos
-.Edición de pedidos
-.Eliminación de pedidos
-.Visualización de pedidos
+. Registro de usuarios
+. Inicio de sesión de usuarios
+. Edición de perfil de usuarios
+. Eliminación de usuarios
 
-3.		Historias para la Funcionalidad “Creación de pedidos”:
 
-Como usuario, quiero poder añadir productos a mi carrito para poder comprarlos.
-Como usuario, quiero poder proporcionar mi dirección de envío durante la creación del pedido para recibir los productos que compro.
-Como usuario, quiero poder seleccionar mi método de pago preferido durante la creación del pedido para completar mi compra.
+Historias para la Funcionalidad “Registro de usuarios”:
 
-4.		Funcionalidades para la Épica “Sistema de Pagos”:
+. Como usuario, quiero poder registrarme en la aplicación para poder realizar compras.
+. Como usuario, quiero poder proporcionar mi correo electrónico y crear una contraseña durante el registro para poder iniciar sesión en el futuro.
+. Como usuario, quiero recibir un correo electrónico de confirmación después del registro para verificar mi cuenta.
+
+
+
+
+3.	Funcionalidades para la Épica “Procesamiento de Pedidos”:
+
+. Creación de pedidos
+. Edición de pedidos
+. Eliminación de pedidos
+. Visualización de pedidos
+
+Historias para la Funcionalidad “Creación de pedidos”:
+
+. Como usuario, quiero poder añadir productos a mi carrito para poder comprarlos.
+. Como usuario, quiero poder proporcionar mi dirección de envío durante la creación del pedido para recibir los productos que compro.
+. Como usuario, quiero poder seleccionar mi método de pago preferido durante la creación del pedido para completar mi compra.
+
+
+
+
+
+4.	Funcionalidades para la Épica “Sistema de Pagos”:
 
 .Añadir métodos de pago
 .Eliminar métodos de pago
 .Seleccionar método de pago predeterminado
 
-4.		Historias para la Funcionalidad “Añadir métodos de pago”:
+Historias para la Funcionalidad “Añadir métodos de pago”:
 
-.Como usuario, quiero poder añadir un método de pago para poder realizar compras.
-.Como usuario, quiero poder proporcionar los detalles de mi tarjeta de crédito para añadir ese método de pago.
-.Como usuario, quiero poder verificar mi método de pago para asegurarme de que se ha añadido correctamente.
+. Como usuario, quiero poder añadir un método de pago para poder realizar compras.
+. Como usuario, quiero poder proporcionar los detalles de mi tarjeta de crédito para añadir ese método de pago.
+. Como usuario, quiero poder verificar mi método de pago para asegurarme de que se ha añadido correctamente.
