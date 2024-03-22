@@ -61,7 +61,7 @@ Historias para la Funcionalidad “Registro de usuarios”:
 
 
 
-3.	Funcionalidades para la Épica “Procesamiento de Pedidos”:
+3. Funcionalidades para la Épica “Procesamiento de Pedidos”:
 
 . Creación de pedidos
 . Edición de pedidos
@@ -78,7 +78,7 @@ Historias para la Funcionalidad “Creación de pedidos”:
 
 
 
-4.	Funcionalidades para la Épica “Sistema de Pagos”:
+4. Funcionalidades para la Épica “Sistema de Pagos”:
 
 .Añadir métodos de pago
 .Eliminar métodos de pago
